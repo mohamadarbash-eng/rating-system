@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, concatMap, delay } from 'rxjs/operators';
 import { interval, of, Subscription } from 'rxjs';
@@ -11,11 +11,11 @@ import { Store } from '@ngrx/store';
   templateUrl: './movies-list-page.component.html',
   styleUrls: ['./movies-list-page.component.scss']
 })
-export class MoviesListPageComponent {
+export class MoviesListPageComponent implements OnDestroy{
 public moviesList: MoviesInterface[] = [];
 public switch = false;
 private subscription: Subscription;
-
+private storeSubscription: Subscription;
 
   constructor(private store: Store<any>, http: HttpClient) {
     http.get(' http://localhost:3000/movies')
@@ -28,7 +28,7 @@ private subscription: Subscription;
       this.moviesList = movies;
     });
 
-      this.store.select('movies').subscribe((ratedItem) => {
+     this.storeSubscription = this.store.select('movies').subscribe((ratedItem) => {
           this.moviesList = this.moviesList.map((movie: MoviesInterface) => {
               if (movie.imdbID === ratedItem.itemId) {
                   movie.imdbRating = ratedItem.rating;
@@ -37,6 +37,10 @@ private subscription: Subscription;
               return movie
           })
       })
+  }
+
+ public ngOnDestroy(): void {
+      this.storeSubscription.unsubscribe();
   }
 
     /**
