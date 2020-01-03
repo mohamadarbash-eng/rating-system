@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row center-align">
+        <h1>Movies List</h1>
+    </div>
+    <div class="row center-align">
+        <button class="btn btn-large" (click)="onClickRandomlyRating()">{{ this.switch ? "Stop RANDOM RATING" : "RANDOM RATING"}}</button>
+    </div>
+    <div class="row" *ngIf="moviesList && moviesList.length; else notFound">
+        <ng-container *ngFor="let movie of moviesList | sortBy:'desc':'imdbRating';">
+    <div class="col l6 m6 s12">
+           <app-movie-widget [movie]="movie" ></app-movie-widget>
+    </div>
+        </ng-container>
+    </div>
+    <ng-template #notFound>
+        <div>
+            <p>
+                sorry something is wrong.....
+            </p>
+        </div>
+    </ng-template>
+</div>
