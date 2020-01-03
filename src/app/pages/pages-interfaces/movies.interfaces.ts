@@ -5,7 +5,7 @@ export interface MoviesInterface {
     Released: Date;
     Poster: string;
     imdbID: string;
-    imdbRating: string;
+    imdbRating: number;
     Genre?: string;
     Language: string;
 }

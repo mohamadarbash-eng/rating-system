@@ -3,7 +3,7 @@
         <h1>Movies List</h1>
     </div>
     <div class="row center-align">
-        <button class="btn btn-large" (click)="onClickRandomlyRating()">{{ this.switch ? "Stop RANDOM RATING" : "RANDOM RATING"}}</button>
+        <button id="rating-btn" class="btn btn-large" (click)="onClickRandomlyRating()">{{ this.switch ? "Stop RANDOM RATING" : "RANDOM RATING"}}</button>
     </div>
     <div class="row" *ngIf="moviesList && moviesList.length; else notFound">
         <ng-container *ngFor="let movie of moviesList | sortBy:'desc':'imdbRating';">

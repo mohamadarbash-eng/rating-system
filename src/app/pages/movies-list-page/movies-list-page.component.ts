@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, concatMap, delay } from 'rxjs/operators';
-import { interval, of, Subscription } from 'rxjs';
+import { interval, Observable, of, Subscription } from 'rxjs';
 // App
 import { MoviesInterface } from '../pages-interfaces/movies.interfaces';
 import { Store } from '@ngrx/store';
@@ -14,6 +14,7 @@ import { Store } from '@ngrx/store';
 export class MoviesListPageComponent implements OnDestroy{
 public moviesList: MoviesInterface[] = [];
 public switch = false;
+
 private subscription: Subscription;
 private storeSubscription: Subscription;
 
@@ -50,16 +51,20 @@ private storeSubscription: Subscription;
   public onClickRandomlyRating(): void {
     this.switch = !this.switch;
     if (this.switch) {
-     this.subscription = interval(1).pipe(
-          concatMap(i => of(Math.random() * 10 / 2).pipe(delay(1000 + (Math.random() * 4000))))
-      ).subscribe((randomRate: number) => {
-        const randomIndex: number = Math.floor(Math.random()* this.moviesList.length);
-       this.moviesList[randomIndex].imdbRating =  randomRate.toFixed(1).toString();
+     this.subscription =this.getRandomStream().subscribe((randomRate: number) => {
+        const randomIndex: number = Math.floor(+(Math.random() * this.moviesList.length).toFixed(1));
+       this.moviesList[randomIndex].imdbRating =  +randomRate.toFixed(1);
        this.moviesList = [...this.moviesList];
       });
     } else {
       this.subscription.unsubscribe();
     }
+  }
+
+  private getRandomStream(): Observable<number> {
+      return interval(1).pipe(
+          concatMap(i => of(Math.random() * 10 / 2).pipe(delay(1000 + (Math.random() * 4000))))
+      )
   }
 
 }

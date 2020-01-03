@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RatingComponent } from '../rating/rating.component';
 import { DebugElement } from '@angular/core';
@@ -32,7 +32,7 @@ describe('RatingComponent', () => {
         await fixture.whenStable();
     }));
 
-    it('should create', () => {
+    it('should create RatingComponent', () => {
         expect(component).toBeTruthy();
     });
 
