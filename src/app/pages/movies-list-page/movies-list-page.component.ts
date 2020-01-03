@@ -55,10 +55,6 @@ private storeSubscription: Subscription;
       ).subscribe((randomRate: number) => {
         const randomIndex: number = Math.floor(Math.random()* this.moviesList.length);
        this.moviesList[randomIndex].imdbRating =  randomRate.toFixed(1).toString();
-       // TODO other solutions :
-       // pure pipe
-       // input object ref..
-       // detectChanges..
        this.moviesList = [...this.moviesList];
       });
     } else {
