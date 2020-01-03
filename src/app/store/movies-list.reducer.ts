@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { MoviesListAction } from './movies-list.action';
 
-interface InitialState {
+export interface InitialState {
     itemId: string,
     rating: number
 }
