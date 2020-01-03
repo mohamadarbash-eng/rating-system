@@ -23,7 +23,6 @@ constructor(private store: Store<Action>) {
   public get getScaleFiveRating() {
     const rate = +this.movie.imdbRating;
     const scaledRate = rate % 2 > 0.5 && rate % 2 < 1 ? Math.ceil(rate) :  Math.floor(rate);
-    console.log(scaledRate);
     return scaledRate;
   }
 
