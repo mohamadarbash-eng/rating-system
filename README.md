@@ -1,7 +1,5 @@
 # Assignment for Frontend Developer
---
 # Rating System 
---
 How to use : 
 * run npm install 
 * navigate to the root of the project and run json-server --watch movies.json
