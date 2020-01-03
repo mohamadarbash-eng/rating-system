@@ -4,6 +4,9 @@ import { MovieWidgetComponent } from './movie-widget.component';
 import { RatingComponent } from '../rating/rating.component';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { Store, StoreModule } from '@ngrx/store';
+import { initialState, moviesListReducer } from '../../store/movies-list.reducer';
+import { provideMockStore } from '@ngrx/store/testing';
 
 
 const MOVIE = {
@@ -22,7 +25,10 @@ describe('MovieWidgetComponent', () => {
 
   beforeEach((async() => {
     TestBed.configureTestingModule({
-      declarations: [ MovieWidgetComponent, RatingComponent ]
+      declarations: [ MovieWidgetComponent, RatingComponent ],
+      providers: [
+        provideMockStore({ initialState }),
+      ]
     })
     .compileComponents();
     fixture = TestBed.createComponent(MovieWidgetComponent);

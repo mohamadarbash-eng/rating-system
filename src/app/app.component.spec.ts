@@ -2,13 +2,16 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
+import { StoreModule } from '@ngrx/store';
+import { moviesListReducer } from './store/movies-list.reducer';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-          PagesModule
+          PagesModule,
+        StoreModule.forRoot({ movies: moviesListReducer })
       ],
       declarations: [
         AppComponent

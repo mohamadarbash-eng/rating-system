@@ -5,6 +5,9 @@ import { SharedModule } from '../../shared/shared.module';
 import { UtilModule } from '../../util/utili.module';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { initialState, moviesListReducer } from '../../store/movies-list.reducer';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('MoviesListPageComponent', () => {
   let component: MoviesListPageComponent;
@@ -13,7 +16,10 @@ describe('MoviesListPageComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule, UtilModule, CommonModule, HttpClientModule],
-      declarations: [ MoviesListPageComponent ]
+      declarations: [ MoviesListPageComponent ],
+      providers: [
+        provideMockStore({ initialState }),
+      ]
     })
     .compileComponents();
   }));

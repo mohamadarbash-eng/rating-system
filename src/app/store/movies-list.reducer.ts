@@ -6,7 +6,7 @@ interface InitialState {
     rating: number
 }
 
-const initialState: InitialState = {
+export const initialState: InitialState = {
     itemId: null,
     rating: null
 };
