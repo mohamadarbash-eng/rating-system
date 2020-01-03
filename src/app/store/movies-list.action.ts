@@ -5,9 +5,7 @@ export interface Action {
     type: '[Movie List Page] Update';
     itemId: string,
     rating: number
-
 }
-
 
 export const MoviesListAction = createAction(
     '[Movie List Page] Update',
